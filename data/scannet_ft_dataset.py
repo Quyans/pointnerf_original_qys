@@ -246,7 +246,7 @@ class ScannetFtDataset(BaseDataset):
             type=int,
             nargs=2,
             default=(640, 480),
-            help='resize target of the image'
+            help='resize target of the image  scannet 640 480'
         )
         return parser
 
@@ -300,7 +300,7 @@ class ScannetFtDataset(BaseDataset):
             self.test_id_list = self.all_id_list[::100]
             self.train_id_list = [self.all_id_list[i] for i in range(len(self.all_id_list)) if (((i % 100) > 19) and ((i % 100) < 81 or (i//100+1)*100>=len(self.all_id_list)))]
         else:  # nsvf configuration
-            step=5
+            step=50
             self.train_id_list = self.all_id_list[::step]
             self.test_id_list = [self.all_id_list[i] for i in range(len(self.all_id_list)) if (i % step) !=0] if self.opt.test_num_step != 1 else self.all_id_list
 

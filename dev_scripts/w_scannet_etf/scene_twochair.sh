@@ -2,13 +2,13 @@
 
 nrCheckpoint="../checkpoints"
 nrDataRoot="../data_src"
-name='scene241_step50_640480'
+name='twochair'
 
 resume_iter=best #latest
 
 data_root="${nrDataRoot}/scannet/scans/"
-scan="scene0241_02"
-img_wh=" 640 480 "
+scan="twochair"
+
 load_points=1
 feat_grad=1
 conf_grad=1
@@ -50,11 +50,11 @@ depth_limit_scale=0
 vscale=" 2 2 2 "
 kernel_size=" 3 3 3 "
 query_size=" 3 3 3 "
-vsize=" 0.008 0.008 0.008 " #" 0.005 0.005 0.005 "
+vsize=" 0.010 0.010 0.010 " #" 0.005 0.005 0.005 "
 wcoord_query=1
 z_depth_dim=400
 max_o=610000
-ranges=" -10.0 -10.0 -10.0 10.0 10.0 10.0 "
+ranges=" -7.0 -3.0 -8.0 7.0 10.0 5.0 "
 SR=24
 K=8
 P=26
@@ -88,8 +88,8 @@ raydist_mode_unit=1
 dataset_name='scannet_ft'
 pin_data_in_memory=1
 model='mvs_points_volumetric'
-near_plane=0.1
-far_plane=8.0
+near_plane=0.0
+far_plane=20.0
 which_ray_generation='near_far_linear' #'nerf_near_far_linear' #
 domain_size='1'
 dir_norm=0
@@ -103,7 +103,7 @@ num_pos_freqs=10
 num_viewdir_freqs=4 #6
 
 random_sample='random'
-random_sample_size=56 # 32 * 32 = 1024
+random_sample_size=28 # 32 * 32 = 1024
 
 batch_size=1
 
@@ -118,8 +118,8 @@ gpu_ids='0'
 checkpoints_dir="${nrCheckpoint}/scannet/"
 resume_dir="${nrCheckpoint}/init/dtu_dgt_d012_img0123_conf_agg2_32_dirclr20"
 
-save_iter_freq=10000
-save_point_freq=10000 #301840 #1
+save_iter_freq=5000
+save_point_freq=5000 #301840 #1
 maximum_step=200000 #500000 #250000 #800000
 
 niter=10000 #1000000
@@ -129,7 +129,7 @@ n_threads=2
 train_and_test=0 #1
 test_num=10
 test_freq=10000 #  #100 #1200 #1200 #30184 #30184 #50000
-print_freq=40
+print_freq=250
 test_num_step=50
 
 prob_freq=10000 #10001
@@ -165,7 +165,6 @@ do
 python3 train_ft.py \
         --experiment $name \
         --scan $scan \
-        --img_wh $img_wh\
         --data_root $data_root \
         --dataset_name $dataset_name \
         --model $model \
@@ -269,8 +268,6 @@ python3 train_ft.py \
         --prune_thresh $prune_thresh \
         --prune_iter $prune_iter \
         --sparse_loss_weight $sparse_loss_weight \
-        --zero_one_loss_items $zero_one_loss_items \
-        --zero_one_loss_weights $zero_one_loss_weights \
         --default_conf $default_conf \
         --edge_filter $edge_filter \
         --vsize $vsize \
@@ -286,3 +283,5 @@ python3 train_ft.py \
         --debug
 
 done
+#--zero_one_loss_items $zero_one_loss_items \
+#--zero_one_loss_weights $zero_one_loss_weights \

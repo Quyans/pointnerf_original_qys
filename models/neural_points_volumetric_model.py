@@ -3,7 +3,10 @@ from .neural_points.neural_points import NeuralPoints
 from .aggregators.point_aggregators import PointAggregator
 import os
 
-
+from torch.utils.tensorboard import SummaryWriter
+from collections import namedtuple
+from typing import Any
+writer = SummaryWriter('my_log/mnist')
 class NeuralPointsVolumetricModel(BaseRenderingModel):
 
     @staticmethod
@@ -82,6 +85,8 @@ class NeuralPointsVolumetricModel(BaseRenderingModel):
             opt.visual_items.append('fine_raycolor')
 
     def run_network_models(self):
+        # writer.add_graph(self.net_ray_marching,self.input,use_strict_trace=False)
+
         return self.fill_invalid(self.net_ray_marching(**self.input), self.input)
 
     def fill_invalid(self, output, input):

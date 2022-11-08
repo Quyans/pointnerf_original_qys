@@ -2,12 +2,12 @@
 
 nrCheckpoint="../checkpoints"
 nrDataRoot="../data_src"
-name='scene241_step50_640480'
+name='scene046_step50_640480'
 
 resume_iter=best #latest
 
 data_root="${nrDataRoot}/scannet/scans/"
-scan="scene0241_02"
+scan="scene0046_02"
 img_wh=" 640 480 "
 load_points=1
 feat_grad=1
@@ -132,7 +132,7 @@ test_freq=10000 #  #100 #1200 #1200 #30184 #30184 #50000
 print_freq=40
 test_num_step=50
 
-prob_freq=10000 #10001
+prob_freq=1000000 #10001
 prob_num_step=100
 prob_kernel_size=" 3 3 3 1 1 1 "
 prob_tiers=" 40000 120000 "

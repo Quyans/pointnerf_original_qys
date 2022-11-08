@@ -1,14 +1,14 @@
 #!/bin/bash
 
-nrCheckpoint="../checkpoints"
-nrDataRoot="../data_src"
-name='scene241_step50_640480'
+nrCheckpoint="/home/vr717/Documents/qys/code/NSEPN_ori/NSEPN/checkpoints"
+nrDataRoot="/home/vr717/Documents/qys/code/NSEPN_ori/NSEPN/data_src"
+name='scene024102_Semantic_640480step5_feats2one_withSemanticEmbedding'
 
 resume_iter=best #latest
 
 data_root="${nrDataRoot}/scannet/scans/"
 scan="scene0241_02"
-img_wh=" 640 480 "
+
 load_points=1
 feat_grad=1
 conf_grad=1
@@ -130,10 +130,10 @@ train_and_test=0 #1
 test_num=10
 test_freq=10000 #  #100 #1200 #1200 #30184 #30184 #50000
 print_freq=40
-test_num_step=50
+test_num_step=5
 
 prob_freq=10000 #10001
-prob_num_step=100
+prob_num_step=100000
 prob_kernel_size=" 3 3 3 1 1 1 "
 prob_tiers=" 40000 120000 "
 prob_mode=0 # 0, n, 1 t, 10 t&n
@@ -158,14 +158,13 @@ split="train"
 
 cd run
 
-for i in $(seq 1 $prob_freq $maximum_step)
+# for i in $(seq 1 $prob_freq $maximum_step)
 
-do
+# do
 
-python3 train_ft.py \
+python3 test_ft.py \
         --experiment $name \
         --scan $scan \
-        --img_wh $img_wh\
         --data_root $data_root \
         --dataset_name $dataset_name \
         --model $model \
@@ -284,5 +283,3 @@ python3 train_ft.py \
         --prob_tiers $prob_tiers \
         --query_size $query_size \
         --debug
-
-done

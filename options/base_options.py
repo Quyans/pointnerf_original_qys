@@ -10,7 +10,8 @@ class BaseOptions:
         #================================ global ================================#
         parser.add_argument('--experiment',
                             type=str,
-                            required=True,
+                            default="abc",
+                            # required=True,
                             dest='name',
                             help='name of the experiment')
         parser.add_argument(

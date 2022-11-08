@@ -57,9 +57,9 @@ class lighting_fast_querier():
         vscale_np = np.array(self.opt.vscale, dtype=np.int32)
         scaled_vsize_np = (vsize_np * vscale_np).astype(np.float32)
         if ranges is not None:
-            # print("min_xyz", min_xyz.shape)
-            # print("max_xyz", max_xyz.shape)
-            # print("ranges", ranges)
+        #     print("min_xyz", min_xyz.shape)
+        #     print("max_xyz", max_xyz.shape)
+        #     print("ranges", ranges)
             min_xyz, max_xyz = torch.max(torch.stack([min_xyz, torch.as_tensor(ranges[:3], dtype=torch.float32, device=min_xyz.device)], dim=0), dim=0)[0], torch.min(torch.stack([max_xyz, torch.as_tensor(ranges[3:], dtype=torch.float32,  device=min_xyz.device)], dim=0), dim=0)[0]
         min_xyz = min_xyz - torch.as_tensor(scaled_vsize_np * self.opt.kernel_size / 2, device=min_xyz.device, dtype=torch.float32)
         max_xyz = max_xyz + torch.as_tensor(scaled_vsize_np * self.opt.kernel_size / 2, device=min_xyz.device, dtype=torch.float32)
